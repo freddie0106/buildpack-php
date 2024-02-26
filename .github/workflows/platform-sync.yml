@@ -259,7 +259,7 @@ jobs:
           # immediately split changelog title and body (separated by a "----" line) for easier copy/paste
           # this also lets us detect if there even is anything to output in the next step (there won't be a changelog-01.md if the changelog is empty)
           # the '{*}' pattern works around a bug in older coreutils csplits: https://github.com/coreutils/coreutils/commit/7cf45f4f6a093a927d3139c87f52999dd2c750ec
-          cat synclogs/sync-*.log | support/devcenter/changelog.php | csplit -s -z -f 'changelog-' -b '%02d.md' --suppress-matched - '/^----$/' '{*}'
+          cat synclogs/sync-*.log test/fixtures/devcenter/changelog/sync.log | support/devcenter/changelog.php | csplit -s -z -f 'changelog-' -b '%02d.md' --suppress-matched - '/^----$/' '{*}'
       - name: Output Changelog markdown
         if: ${{ hashFiles('changelog-01.md') != '' }}
         run: |
